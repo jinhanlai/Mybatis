@@ -7,11 +7,20 @@
 
     <!--导入外部依赖配置-->
     <properties resource="db.properties"></properties>
-
+    <settings>
+<!--        &lt;!&ndash;标准日志功能实现&ndash;&gt;-->
+<!--        <setting name="logImpl" value="STDOUT_LOGGING"/>-->
+        <setting name="logImpl" value="LOG4J"/>
+    </settings>
     <!--设置别名,支持注解设置别名-->
     <typeAliases>
         <typeAlias type="com.laijinhan.dto.UserDTO" alias="UserDTO"/>
     </typeAliases>
+
+    <!--类型处理器，把数据库的bool类型映射到java的enum类型-->
+    <typeHandlers>
+        <typeHandler handler="com.laijinhan.typehandler.EnabledTypeHandler" javaType="com.laijinhan.enums.Enabled"/>
+    </typeHandlers>
 
     <environments default="test">
 

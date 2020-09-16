@@ -1,6 +1,7 @@
 package com.laijinhan.dto;
 
 
+import com.laijinhan.enums.Enabled;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 
@@ -15,4 +16,6 @@ public class UserDTO {
     private int id;
     private String name;
     private String pwd;
+    private Enabled enabled;
+
 }

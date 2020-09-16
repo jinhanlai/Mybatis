@@ -9,7 +9,7 @@
     
     <resultMap id="UserMap" type="UserDTO">
         <!--column数据库中的列， preperty实体类中的属性-->
-        <!--映射一样的可以不用写-->
+        <!--映射一样的列可以不用写-->
         <result column="id" property="id"/>
         <result column="user" property="user"/>
         <result column="pwd" property="pwd"/>
@@ -21,7 +21,7 @@
     <!--增加，删除，修改必须执行事务-->
     <!--对象的属性可以直接获得-->
     <insert id="addUser" parameterType="com.laijinhan.dto.UserDTO">
-        insert into mybatis.user(id,name ,pwd) values (#{id},#{name},#{pwd});
+        insert into mybatis.user(id,name ,pwd,enabled) values (#{id},#{name},#{pwd},#{enabled});
     </insert>
 
     <insert id="addUser1" parameterType="map">

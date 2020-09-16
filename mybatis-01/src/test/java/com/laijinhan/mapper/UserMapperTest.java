@@ -1,9 +1,10 @@
 package com.laijinhan.mapper;
 
 import com.laijinhan.dto.UserDTO;
+import com.laijinhan.enums.Enabled;
 import com.laijinhan.utils.MybatisUtils;
-import com.sun.tools.internal.xjc.reader.xmlschema.bindinfo.BIConversion;
 import org.apache.ibatis.session.SqlSession;
+import org.apache.log4j.Logger;
 import org.junit.Test;
 
 import java.util.ArrayList;
@@ -16,6 +17,7 @@ import java.util.HashMap;
 
 
 public class UserMapperTest {
+    static Logger logger=Logger.getLogger(UserMapperTest.class);
     @Test
     public void test() {
         //先获取sqlsession对象
@@ -36,7 +38,7 @@ public class UserMapperTest {
         SqlSession sqlSession = MybatisUtils.getSqlSession();
         // 根据反射获取mapper对象
         UserMapper mapper = sqlSession.getMapper(UserMapper.class);
-        mapper.addUser(new UserDTO(6,"王七","123456"));
+        mapper.addUser(new UserDTO(11,"王十一","123456", Enabled.disabled));
         sqlSession.commit();
         //关闭sqlsession
         sqlSession.close();
@@ -57,6 +59,11 @@ public class UserMapperTest {
         sqlSession.commit();
         //关闭sqlsession
         sqlSession.close();
+    }
+    @Test
+    public  void  testLog4j(){
+        logger.info("进入log4j info信息");
+        logger.debug("进入log4j debug信息");
     }
 
 }
