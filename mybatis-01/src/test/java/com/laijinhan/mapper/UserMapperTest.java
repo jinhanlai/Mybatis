@@ -3,12 +3,14 @@ package com.laijinhan.mapper;
 import com.laijinhan.dto.UserDTO;
 import com.laijinhan.enums.Enabled;
 import com.laijinhan.utils.MybatisUtils;
+import org.apache.ibatis.session.RowBounds;
 import org.apache.ibatis.session.SqlSession;
 import org.apache.log4j.Logger;
 import org.junit.Test;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 
 /**
  * @Author laijinhan
@@ -65,5 +67,39 @@ public class UserMapperTest {
         logger.info("进入log4j info信息");
         logger.debug("进入log4j debug信息");
     }
+
+    @Test
+    public void  getUserByRouwBounds(){
+        SqlSession sqlSession = MybatisUtils.getSqlSession();
+        RowBounds rowBounds = new RowBounds(1, 2);
+        /**
+         * 从sql层面实现分页
+         */
+        List<UserDTO> userDTOList = sqlSession.selectList("com.laijinhan.mapper.UserMapper.getUserList", null, rowBounds);
+        for(UserDTO user:userDTOList){
+            System.out.println(user);
+        }
+
+        sqlSession.close();
+    }
+
+    @Test
+    public void  getUserByLimit(){
+        SqlSession sqlSession = MybatisUtils.getSqlSession();
+        /**
+         * 从limit层面实现
+         */
+        UserMapper mapper = sqlSession.getMapper(UserMapper.class);
+        HashMap<String,Integer> map=new HashMap<>();
+        map.put("offsetindex",1);
+        map.put("pageindex",2);
+        ArrayList<UserDTO> userDTOList = mapper.getUserLimit(map);
+        for(UserDTO user:userDTOList){
+            System.out.println(user);
+        }
+
+        sqlSession.close();
+    }
+
 
 }

@@ -17,7 +17,7 @@
     
     <select id="getUserList"  resultMap="UserMap" >
     select * from mybatis.user;
-  </select>
+    </select>
     <!--增加，删除，修改必须执行事务-->
     <!--对象的属性可以直接获得-->
     <insert id="addUser" parameterType="com.laijinhan.dto.UserDTO">
@@ -27,4 +27,9 @@
     <insert id="addUser1" parameterType="map">
         insert into mybatis.user(id,name ,pwd) values (#{id},#{name},#{pwd});
     </insert>
+<!--    分页-->
+    <select id="getUserLimit" parameterType="map" resultMap="UserMap" >
+    select * from mybatis.user limit #{offsetindex}, #{pageindex};
+  </select>
+
 </mapper>
