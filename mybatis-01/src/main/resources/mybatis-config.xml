@@ -15,12 +15,17 @@
     <!--设置别名,支持注解设置别名-->
     <typeAliases>
         <typeAlias type="com.laijinhan.dto.UserDTO" alias="UserDTO"/>
+
+        <!--给包下的实体类设置别名-->
+        <package name="com.laijinhan.dto"/>
+
     </typeAliases>
 
     <!--类型处理器，把数据库的bool类型映射到java的enum类型-->
     <typeHandlers>
         <typeHandler handler="com.laijinhan.typehandler.EnabledTypeHandler" javaType="com.laijinhan.enums.Enabled"/>
     </typeHandlers>
+
 
     <environments default="test">
 
@@ -48,5 +53,7 @@
     <!--每一个Mapper.xml需要mybatis核心配置文件中注册-->
     <mappers>
         <mapper resource="mapper/UserMapper.xml"/>
+        <mapper resource="mapper/StudentMapper.xml"/>
+        <mapper resource="mapper/TeacherMapper.xml"/>
     </mappers>
 </configuration>

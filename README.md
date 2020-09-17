@@ -11,6 +11,7 @@ maven 3.7
 > SqlSessionFactory使用的是单例模式（用静态类的创建方式）一旦创建就一直存在
 > SqlSession：每个线程都有自己的SqlSession，但是他是线程不安全的，不能被共享，最佳是放在方法域里面，绝对不能将SqlSession实例的引用放在一个类的静态域。
 > SqlSession使用完必须关闭。
+> sqlSessionFactory.openssion()会产生sqlsession对象，参数true会自动提交事务，默认为false；
 ## 配置解析
 ### 核心配置文件
 mybatis-config.xml
@@ -65,7 +66,14 @@ log4j：可以输出到控制台和GUI组件。可以控制每一条日志的输
 > static 也可以修改代码块，来提高性能，因为只会在类初次加载时才会执行一次
 > static 也可以修饰类，但是智能作为内部类存在；被static修饰的内部类可以直接作为一个普通类来使用，而不需实例一个外部类
 
-
+## 注解
+可以直接在Mapper接口上面使用注解来写简单的sql语句，而不需要写mapper配置文件
+`@Select("SELECT * FROM blog WHERE id = #{id}")`
+### @Param{}注解
+基本类型参数或者String类型需要加上
+引用类型不需要加
+如果只有一个基本类型的话可以省略，但是建议加上
+在sql注解中引用的就是@Param{"id"}中的属性名
 
 ## 插件
 mybatis-generator-core

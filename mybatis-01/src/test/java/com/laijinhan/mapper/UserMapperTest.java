@@ -87,7 +87,7 @@ public class UserMapperTest {
     public void  getUserByLimit(){
         SqlSession sqlSession = MybatisUtils.getSqlSession();
         /**
-         * 从limit层面实现
+         * 从limit层面实现.注意mybatis 有分页插件pagehelper
          */
         UserMapper mapper = sqlSession.getMapper(UserMapper.class);
         HashMap<String,Integer> map=new HashMap<>();
