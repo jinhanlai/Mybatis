@@ -1,6 +1,7 @@
 package com.laijinhan.mapper;
 
 import com.laijinhan.dto.UserDTO;
+import org.apache.ibatis.annotations.Param;
 import org.apache.ibatis.annotations.Select;
 import org.apache.ibatis.type.Alias;
 
@@ -17,6 +18,8 @@ import java.util.Map;
 public interface UserMapper {
     //@Select("SELECT * FROM mybatis.user")
     ArrayList<UserDTO> getUserList();
+
+    UserDTO queryUserById(@Param("id") int id);
 
     int addUser(UserDTO user);
 

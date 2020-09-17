@@ -8,6 +8,7 @@ import org.apache.ibatis.session.SqlSession;
 import org.apache.log4j.Logger;
 import org.junit.Test;
 
+import javax.jws.soap.SOAPBinding;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -98,6 +99,20 @@ public class UserMapperTest {
             System.out.println(user);
         }
 
+        sqlSession.close();
+    }
+
+    @Test
+    public void  queryUserById(){
+        /**
+         * 默认缓存sqlsession级别的，所以第二个查询直接在缓存中可获得
+         */
+        SqlSession sqlSession = MybatisUtils.getSqlSession();
+        UserMapper mapper = sqlSession.getMapper(UserMapper.class);
+        UserDTO userDTO = mapper.queryUserById(1);
+        System.out.println(userDTO);
+
+        System.out.println(mapper.queryUserById(1));
         sqlSession.close();
     }
 

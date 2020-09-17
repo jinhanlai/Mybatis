@@ -75,6 +75,49 @@ log4j：可以输出到控制台和GUI组件。可以控制每一条日志的输
 如果只有一个基本类型的话可以省略，但是建议加上
 在sql注解中引用的就是@Param{"id"}中的属性名
 
+## 缓存
+mybatis 默认存在两种缓存方式：
+一级缓存（默认情况）：sqlsession级别的缓存，也称为本地缓存
+二级缓存： 基于namespace的缓存
+> 可以自定义缓存接口Cache来实现二级缓存。
+
+缓存策略有：
+* LRU – 最近最少使用：移除最长时间不被使用的对象。
+* FIFO – 先进先出：按对象进入缓存的顺序来移除它们。
+* SOFT – 软引用：基于垃圾回收器状态和软引用规则移除对象。
+* WEAK – 弱引用：更积极地基于垃圾收集器状态和弱引用规则移除对象。
+### 一级缓存
+只在 sqlsession 开启和关闭之间进行缓存。
+映射语句文件中的所有 select 语句的结果将会被缓存。
+映射语句文件中的所有 insert、update 和 delete 语句会刷新缓存。
+缓存会使用最近最少使用算法（LRU, Least Recently Used）算法来清除不需要的缓存。
+缓存不会定时进行刷新（也就是说，没有刷新间隔）。
+> sqlsession.clearCache() 可以手动清理缓存
+
+### 二级缓存
+在mybatis配置文件的setting中开启缓存，然后在sql的映射文件中添加 `<cache/>`标签即可 使用二级缓存
+
+基于namespace（sql映射文件里面哪一个namespace）级别的缓存
+
+只要开启了二级缓存，在一个mapper内就有效
+所有的数据都先存储在一级缓存中，当会话提交或者关闭后才提交到二级缓存中。
+顺序：先查询二级缓存，在查看一级缓存。
+> 二级缓存需要序列化返回的实体对象
+
+### 自定义缓存
+ehcache
+> 学习redis分布式数据库，缓存
+## mybatis 执行步骤：
+1. Resource获取加载全局配置文件
+2. 实例化sqlsessionFactoryBuilder构造器
+3. 解析配置文件流 XMLConfigBuilder
+4. Configuration所有的配置
+5. sqlsession实例化
+6. 事务管理器
+7. 创建executor执行器
+8. 创建sqlsession
+9. 实现CURD
+10. 提交事务
 ## 插件
 mybatis-generator-core
 [mybatis-plus](https://baomidou.com/)
