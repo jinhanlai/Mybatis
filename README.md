@@ -125,3 +125,4 @@ mybatis-generator-core
 ##  参考文档
 [官网](https://mybatis.org/mybatis-3/zh/index.html)
 [类型处理器参考博客](https://www.cnblogs.com/zwwhnly/p/11238131.html)
+[博客地址](http://ljh.gold/java-mybatis/)

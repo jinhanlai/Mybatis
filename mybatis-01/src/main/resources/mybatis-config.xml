@@ -28,7 +28,6 @@
 
 
     <environments default="test">
-
         <environment id="development">
             <transactionManager type="JDBC"/>
             <dataSource type="POOLED">

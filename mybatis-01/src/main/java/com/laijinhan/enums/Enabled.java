@@ -4,8 +4,6 @@ package com.laijinhan.enums;
  * @Author laijinhan
  * @date 2020/9/16 9:16 下午
  */
-
-
 public enum Enabled {
     disabled(0),
     enabled(1);
